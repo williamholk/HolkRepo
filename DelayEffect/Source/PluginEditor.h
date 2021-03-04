@@ -16,7 +16,8 @@
 */
 class DelayEffectAudioProcessorEditor  : public juce::AudioProcessorEditor,
                                          public juce::Slider::Listener,
-                                         public juce::ComboBox::Listener
+                                         public juce::ComboBox::Listener,
+                                         public juce::Button::Listener
 {
 public:
     DelayEffectAudioProcessorEditor (DelayEffectAudioProcessor&);
@@ -29,6 +30,8 @@ public:
     void sliderValueChanged(Slider * slider) override;
     
     void comboBoxChanged(ComboBox * comboBox) override;
+    
+    void buttonClicked(Button * button) override;
 
 private:
     // This reference is provided as a quick way for your editor to
@@ -38,6 +41,10 @@ private:
     Slider delayKnob;
     
     ComboBox noteSelector;
+    
+    ToggleButton tempoSyncButton;
+    
+    ToggleButton notTempoSyncButton;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayEffectAudioProcessorEditor)
 };

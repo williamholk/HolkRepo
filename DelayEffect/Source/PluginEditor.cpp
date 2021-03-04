@@ -36,6 +36,20 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     noteSelector.setCentrePosition(200, 200);
     addAndMakeVisible(noteSelector);
     
+    tempoSyncButton.addListener(this);
+    tempoSyncButton.setBounds(270, 178, 100, 40);
+    tempoSyncButton.setButtonText("BPM Sync");
+    tempoSyncButton.setToggleState(audioProcessor.tempoSyncd, dontSendNotification);
+    tempoSyncButton.setRadioGroupId(1);
+    addAndMakeVisible(tempoSyncButton);
+    
+    notTempoSyncButton.addListener(this);
+    notTempoSyncButton.setBounds(270, 130, 100, 40);
+    notTempoSyncButton.setButtonText("Sync Off");
+    notTempoSyncButton.setToggleState(!audioProcessor.tempoSyncd, dontSendNotification);
+    notTempoSyncButton.setRadioGroupId(1);
+    addAndMakeVisible(notTempoSyncButton);
+    
     
     
     
@@ -92,4 +106,20 @@ void DelayEffectAudioProcessorEditor::comboBoxChanged(ComboBox *comboBox){
             audioProcessor.noteDuration = 0.25f;
         }
     }
+}
+
+void DelayEffectAudioProcessorEditor::buttonClicked(Button *button){
+    
+    if(button == &tempoSyncButton){
+        audioProcessor.tempoSyncd = true;
+        delayKnob.setEnabled(false);
+        noteSelector.setEnabled(true);
+    }
+    
+    if(button == &notTempoSyncButton){
+        audioProcessor.tempoSyncd = false;
+        delayKnob.setEnabled(true);
+        noteSelector.setEnabled(false);
+    }
+    
 }
