@@ -32,6 +32,7 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     noteSelector.addItem("Quarter", 2);
     noteSelector.addItem("8th", 3);
     noteSelector.addItem("16th", 4);
+    noteSelector.addItem("32nd", 5);
     noteSelector.setSelectedId(2);
     noteSelector.setBounds(325, 25, 120, 40);
     noteSelector.setCentrePosition(250, 25);
@@ -73,7 +74,8 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     lowPassKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     addAndMakeVisible(lowPassKnob);
     
-    
+    delayKnob.setEnabled(!audioProcessor.tempoSyncd);
+    noteSelector.setEnabled(audioProcessor.tempoSyncd);
     
     
 }
@@ -138,6 +140,10 @@ void DelayEffectAudioProcessorEditor::comboBoxChanged(ComboBox *comboBox){
         if(noteSelector.getSelectedId() == 4){
             // 16th note
             audioProcessor.noteDuration = 0.25f;
+        }
+        if(noteSelector.getSelectedId() == 5){
+            // 32nd note
+            audioProcessor.noteDuration = 0.125f;
         }
     }
 }

@@ -42,7 +42,7 @@ private:
     
     float bpm = 120.f;
     
-    float noteDuration = 1.f; // 1 - quarter, 2 - falf, 0.5 - 8th, 0.25 - 16th
+    float noteDuration = 1.f; // 1 - quarter, 2 - half, 0.5 - 8th, 0.25 - 16th, 0.125 - 16th
     
     float feedbackGain = 1.f;
     
