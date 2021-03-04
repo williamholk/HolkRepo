@@ -14,7 +14,8 @@
 //==============================================================================
 /**
 */
-class DelayEffectAudioProcessorEditor  : public juce::AudioProcessorEditor
+class DelayEffectAudioProcessorEditor  : public juce::AudioProcessorEditor,
+                                         public juce::Slider::Listener
 {
 public:
     DelayEffectAudioProcessorEditor (DelayEffectAudioProcessor&);
@@ -23,11 +24,15 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
+    
+    void sliderValueChanged(Slider * slider) override;
 
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     DelayEffectAudioProcessor& audioProcessor;
+    
+    Slider delayKnob;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayEffectAudioProcessorEditor)
 };

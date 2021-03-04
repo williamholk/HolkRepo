@@ -15,7 +15,20 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    setSize (400, 400);
+    
+    delayKnob.addListener(this);
+    delayKnob.setBounds(100, 50, 125, 125);
+    delayKnob.setCentrePosition(200, 100);
+    delayKnob.setValue(audioProcessor.delayMS);
+    delayKnob.setRange(10.f, 1000.f,1.f);
+    delayKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
+    delayKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    addAndMakeVisible(delayKnob);
+    
+    
+    
+    
 }
 
 DelayEffectAudioProcessorEditor::~DelayEffectAudioProcessorEditor()
@@ -30,11 +43,21 @@ void DelayEffectAudioProcessorEditor::paint (juce::Graphics& g)
 
     g.setColour (juce::Colours::white);
     g.setFont (15.0f);
-    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
+    //g.drawFittedText ("ms", getLocalBounds(), juce::Justification::centred, 1);
+    //g.drawFittedText("ms", 300, 150, 100, 25, juce::Justification::verticallyCentred, 1);
+    g.drawText("ms", 215, 138, 100, 25, NULL);
 }
 
 void DelayEffectAudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
+}
+
+void DelayEffectAudioProcessorEditor::sliderValueChanged(Slider * slider){
+    
+    if (slider == &delayKnob){
+        audioProcessor.delayMS = delayKnob.getValue();
+    }
+    
 }

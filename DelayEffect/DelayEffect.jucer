@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="cc3VJv" name="DelayEffect" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
+              displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="ysjV02" name="DelayEffect">
     <GROUP id="{AEA30359-DB88-2BB9-3D09-583AC70A9122}" name="Source">
       <FILE id="uXhZfl" name="PluginProcessor.cpp" compile="1" resource="0"
