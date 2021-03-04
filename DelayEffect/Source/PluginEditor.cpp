@@ -24,6 +24,7 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     delayKnob.setRange(10.f, 1000.f,1.f);
     delayKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
     delayKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    delayKnob.setTextValueSuffix("ms");
     addAndMakeVisible(delayKnob);
     
     noteSelector.addListener(this);
@@ -59,6 +60,16 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     feedbackKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     addAndMakeVisible(feedbackKnob);
     
+    lowPassKnob.addListener(this);
+    lowPassKnob.setBounds(50, 50, 110, 110);
+    lowPassKnob.setCentrePosition(335, 315);
+    lowPassKnob.setRange(20.f, 20000.f, 1.f);
+    lowPassKnob.setSkewFactorFromMidPoint(2000);
+    lowPassKnob.setValue(audioProcessor.lowPassFreq);
+    lowPassKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
+    lowPassKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    addAndMakeVisible(lowPassKnob);
+    
     
     
     
@@ -78,9 +89,11 @@ void DelayEffectAudioProcessorEditor::paint (juce::Graphics& g)
     g.setFont (15.0f);
     //g.drawFittedText ("ms", getLocalBounds(), juce::Justification::centred, 1);
     //g.drawFittedText("ms", 300, 150, 100, 25, juce::Justification::verticallyCentred, 1);
-    g.drawText("ms", 215, 138, 100, 25, NULL);
+    //g.drawText("ms", 215, 138, 100, 25, NULL);
     
     g.drawText("Feedback", 45, 243, 100, 25, NULL);
+    
+    g.drawText("LPF", 325, 243, 100, 25, NULL);
 }
 
 void DelayEffectAudioProcessorEditor::resized()
@@ -97,6 +110,10 @@ void DelayEffectAudioProcessorEditor::sliderValueChanged(Slider * slider){
     
     if (slider == &feedbackKnob){
         audioProcessor.feedbackGain = feedbackKnob.getValue();
+    }
+    
+    if (slider == &lowPassKnob){
+        audioProcessor.lowPassFreq = lowPassKnob.getValue();
     }
     
 }

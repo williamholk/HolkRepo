@@ -30,6 +30,8 @@ public:
     
     void setFeedbackGain(float newFeedbackGain);
     
+    void setLowPassFreq(float newLowPassFreq);
+    
 private:
     
     float Fs = 48000.f;
@@ -43,5 +45,7 @@ private:
     float noteDuration = 1.f; // 1 - quarter, 2 - falf, 0.5 - 8th, 0.25 - 16th
     
     float feedbackGain = 1.f;
+    
+    float lowPassFreq = 20000.f;
     
 };

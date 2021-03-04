@@ -49,3 +49,16 @@ void DelayEffect::setFeedbackGain(float newFeedbackGain){
         feedbackGain = newFeedbackGain;
     }
 }
+
+void DelayEffect::setLowPassFreq(float newLowPassFreq){
+    if(newLowPassFreq > 20000.f){
+        lowPassFreq = 20000.f;
+    }
+    else if(newLowPassFreq < 0.f){
+        lowPassFreq = 0.f;
+    }
+    else{
+        lowPassFreq = newLowPassFreq;
+    }
+    
+}
