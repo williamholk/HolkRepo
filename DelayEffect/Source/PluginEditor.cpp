@@ -50,6 +50,15 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     notTempoSyncButton.setRadioGroupId(1);
     addAndMakeVisible(notTempoSyncButton);
     
+    feedbackKnob.addListener(this);
+    feedbackKnob.setBounds(50, 50, 110, 110);
+    feedbackKnob.setCentrePosition(75, 315);
+    feedbackKnob.setValue(audioProcessor.feedbackGain);
+    feedbackKnob.setRange(0.f, 1.f,0.01f);
+    feedbackKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
+    feedbackKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    addAndMakeVisible(feedbackKnob);
+    
     
     
     
@@ -70,6 +79,8 @@ void DelayEffectAudioProcessorEditor::paint (juce::Graphics& g)
     //g.drawFittedText ("ms", getLocalBounds(), juce::Justification::centred, 1);
     //g.drawFittedText("ms", 300, 150, 100, 25, juce::Justification::verticallyCentred, 1);
     g.drawText("ms", 215, 138, 100, 25, NULL);
+    
+    g.drawText("Feedback", 45, 243, 100, 25, NULL);
 }
 
 void DelayEffectAudioProcessorEditor::resized()
@@ -82,6 +93,10 @@ void DelayEffectAudioProcessorEditor::sliderValueChanged(Slider * slider){
     
     if (slider == &delayKnob){
         audioProcessor.delayMS = delayKnob.getValue();
+    }
+    
+    if (slider == &feedbackKnob){
+        audioProcessor.feedbackGain = feedbackKnob.getValue();
     }
     
 }

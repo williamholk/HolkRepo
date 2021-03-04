@@ -28,6 +28,8 @@ public:
     
     void setNoteDuration(float newNoteDuration);
     
+    void setFeedbackGain(float newFeedbackGain);
+    
 private:
     
     float Fs = 48000.f;
@@ -39,5 +41,7 @@ private:
     float bpm = 120.f;
     
     float noteDuration = 1.f; // 1 - quarter, 2 - falf, 0.5 - 8th, 0.25 - 16th
+    
+    float feedbackGain = 1.f;
     
 };

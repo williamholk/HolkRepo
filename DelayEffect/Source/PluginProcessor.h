@@ -57,6 +57,7 @@ public:
     float delayMS = 100.f;
     float noteDuration = 1.f;
     bool tempoSyncd = true;
+    float feedbackGain = 1.f;
     
 private:
     

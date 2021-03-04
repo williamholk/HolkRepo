@@ -45,6 +45,8 @@ private:
     ToggleButton tempoSyncButton;
     
     ToggleButton notTempoSyncButton;
+    
+    Slider feedbackKnob;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayEffectAudioProcessorEditor)
 };

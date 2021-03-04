@@ -40,3 +40,12 @@ void DelayEffect::setNoteDuration(float newNoteDuration){
     setDelayMS(msNote);
     
 }
+
+void DelayEffect::setFeedbackGain(float newFeedbackGain){
+    if(newFeedbackGain > 1 || newFeedbackGain < 0){
+        feedbackGain = 0;
+    }
+    else{
+        feedbackGain = newFeedbackGain;
+    }
+}
