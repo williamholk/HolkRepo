@@ -15,11 +15,11 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (400, 400);
+    setSize (500, 250);
     
     delayKnob.addListener(this);
-    delayKnob.setBounds(100, 50, 125, 125);
-    delayKnob.setCentrePosition(200, 100);
+    delayKnob.setBounds(100, 50, 150, 150);
+    delayKnob.setCentrePosition(250, 140);
     delayKnob.setValue(audioProcessor.delayMS);
     delayKnob.setRange(10.f, 1000.f,1.f);
     delayKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
@@ -33,12 +33,13 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     noteSelector.addItem("8th", 3);
     noteSelector.addItem("16th", 4);
     noteSelector.setSelectedId(2);
-    noteSelector.setBounds(275, 100, 120, 40);
-    noteSelector.setCentrePosition(200, 200);
+    noteSelector.setBounds(325, 25, 120, 40);
+    noteSelector.setCentrePosition(250, 25);
     addAndMakeVisible(noteSelector);
     
     tempoSyncButton.addListener(this);
     tempoSyncButton.setBounds(270, 178, 100, 40);
+    tempoSyncButton.setCentrePosition(250, 60);
     tempoSyncButton.setButtonText("BPM Sync");
     tempoSyncButton.setToggleState(audioProcessor.tempoSyncd, dontSendNotification);
     tempoSyncButton.setRadioGroupId(1);
@@ -46,6 +47,7 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     
     notTempoSyncButton.addListener(this);
     notTempoSyncButton.setBounds(270, 130, 100, 40);
+    notTempoSyncButton.setCentrePosition(250, 230);
     notTempoSyncButton.setButtonText("Sync Off");
     notTempoSyncButton.setToggleState(!audioProcessor.tempoSyncd, dontSendNotification);
     notTempoSyncButton.setRadioGroupId(1);
@@ -53,7 +55,7 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     
     feedbackKnob.addListener(this);
     feedbackKnob.setBounds(50, 50, 110, 110);
-    feedbackKnob.setCentrePosition(75, 315);
+    feedbackKnob.setCentrePosition(100, 125);
     feedbackKnob.setValue(audioProcessor.feedbackGain);
     feedbackKnob.setRange(0.f, 1.f,0.01f);
     feedbackKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
@@ -62,10 +64,11 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     
     lowPassKnob.addListener(this);
     lowPassKnob.setBounds(50, 50, 110, 110);
-    lowPassKnob.setCentrePosition(335, 315);
+    lowPassKnob.setCentrePosition(400, 125);
     lowPassKnob.setRange(20.f, 20000.f, 1.f);
     lowPassKnob.setSkewFactorFromMidPoint(2000);
     lowPassKnob.setValue(audioProcessor.lowPassFreq);
+    lowPassKnob.setTextValueSuffix("Hz");
     lowPassKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
     lowPassKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     addAndMakeVisible(lowPassKnob);
@@ -89,11 +92,10 @@ void DelayEffectAudioProcessorEditor::paint (juce::Graphics& g)
     g.setFont (15.0f);
     //g.drawFittedText ("ms", getLocalBounds(), juce::Justification::centred, 1);
     //g.drawFittedText("ms", 300, 150, 100, 25, juce::Justification::verticallyCentred, 1);
-    //g.drawText("ms", 215, 138, 100, 25, NULL);
     
-    g.drawText("Feedback", 45, 243, 100, 25, NULL);
+    g.drawText("Feedback", 70, 55, 100, 25, NULL);
     
-    g.drawText("LPF", 325, 243, 100, 25, NULL);
+    g.drawText("LPF", 388, 55, 100, 25, NULL);
 }
 
 void DelayEffectAudioProcessorEditor::resized()
