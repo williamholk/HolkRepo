@@ -26,6 +26,16 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     delayKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     addAndMakeVisible(delayKnob);
     
+    noteSelector.addListener(this);
+    noteSelector.addItem("Half", 1);
+    noteSelector.addItem("Quarter", 2);
+    noteSelector.addItem("8th", 3);
+    noteSelector.addItem("16th", 4);
+    noteSelector.setSelectedId(2);
+    noteSelector.setBounds(275, 100, 120, 40);
+    noteSelector.setCentrePosition(200, 200);
+    addAndMakeVisible(noteSelector);
+    
     
     
     
@@ -60,4 +70,26 @@ void DelayEffectAudioProcessorEditor::sliderValueChanged(Slider * slider){
         audioProcessor.delayMS = delayKnob.getValue();
     }
     
+}
+
+void DelayEffectAudioProcessorEditor::comboBoxChanged(ComboBox *comboBox){
+   
+    if (comboBox == &noteSelector){
+        if(noteSelector.getSelectedId() == 1){
+            // half note
+            audioProcessor.noteDuration = 2.f;
+        }
+        if(noteSelector.getSelectedId() == 2){
+            // quarter note
+            audioProcessor.noteDuration = 1.f;
+        }
+        if(noteSelector.getSelectedId() == 3){
+            // 8th note
+            audioProcessor.noteDuration = 0.5f;
+        }
+        if(noteSelector.getSelectedId() == 4){
+            // 16th note
+            audioProcessor.noteDuration = 0.25f;
+        }
+    }
 }

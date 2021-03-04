@@ -23,3 +23,20 @@ void DelayEffect::setDelayMS(float newDelayMS){
         delaySamples = round(Fs*delayMS/1000.f);
     }
 }
+
+void DelayEffect::setBPM(float newBPM){
+    bpm = newBPM;
+}
+
+
+void DelayEffect::setNoteDuration(float newNoteDuration){
+    noteDuration = newNoteDuration;
+    
+    // Convert to delaySamples;
+    float beatSec = bpm * (1.f/60.f);
+    float secBeat = 1/beatSec;
+    float secNote = noteDuration * secBeat;
+    float msNote = secNote * 1000.f;
+    setDelayMS(msNote);
+    
+}

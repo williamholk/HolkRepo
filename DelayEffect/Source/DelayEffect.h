@@ -24,11 +24,20 @@ public:
     
     void setDelayMS(float newDelayMS);
     
+    void setBPM(float newBPM);
+    
+    void setNoteDuration(float newNoteDuration);
+    
 private:
     
     float Fs = 48000.f;
     
     float delayMS = 500.f;
+    
     int delaySamples = round(Fs*delayMS/1000.f);
+    
+    float bpm = 120.f;
+    
+    float noteDuration = 1.f; // 1 - quarter, 2 - falf, 0.5 - 8th, 0.25 - 16th
     
 };

@@ -55,10 +55,18 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     float delayMS = 100.f;
+    float noteDuration = 1.f;
+    bool tempoSyncd = true;
     
 private:
     
     DelayEffect delay;
+    
+    AudioPlayHead* playHead;
+    
+    AudioPlayHead::CurrentPositionInfo currentPositionInfo;
+    
+    float bpm = 120.f;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayEffectAudioProcessor)
