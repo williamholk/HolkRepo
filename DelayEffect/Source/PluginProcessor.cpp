@@ -167,6 +167,7 @@ void DelayEffectAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     }
     
     delay.setFeedbackGain(feedbackGain);
+    delay.setLowPassFreq(lowPassFreq);
     
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {

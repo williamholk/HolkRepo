@@ -118,6 +118,7 @@ void DelayEffectAudioProcessorEditor::sliderValueChanged(Slider * slider){
     
     if (slider == &lowPassKnob){
         audioProcessor.lowPassFreq = lowPassKnob.getValue();
+        audioProcessor.filter.setFreq(audioProcessor.lowPassFreq);
     }
     
 }

@@ -32,7 +32,9 @@ float DelayEffect::processSample(float x, int c){
         delayIndex += BUFFERSIZE;
     }
     
-    float y = x + feedbackGain * w[c][delayIndex];
+    float d = filter.processSample(w[c][delayIndex], c);
+    
+    float y = x + feedbackGain * d;
     
     w[c][writeIndex[c]] = y;
     
@@ -74,12 +76,16 @@ void DelayEffect::setFeedbackGain(float newFeedbackGain){
 void DelayEffect::setLowPassFreq(float newLowPassFreq){
     if(newLowPassFreq > 20000.f){
         lowPassFreq = 20000.f;
+        filter.setFreq(lowPassFreq);
     }
     else if(newLowPassFreq < 0.f){
         lowPassFreq = 0.f;
+        filter.setFreq(lowPassFreq);
     }
     else{
         lowPassFreq = newLowPassFreq;
+        filter.setFreq(lowPassFreq);
     }
     
 }
+
