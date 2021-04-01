@@ -13,6 +13,8 @@
       <FILE id="Jeaij7" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
       <FILE id="YrApm3" name="DelayEffect.cpp" compile="1" resource="0" file="Source/DelayEffect.cpp"/>
       <FILE id="wcA4jA" name="DelayEffect.h" compile="0" resource="0" file="Source/DelayEffect.h"/>
+      <FILE id="HMxBly" name="Biquad.cpp" compile="1" resource="0" file="Source/Biquad.cpp"/>
+      <FILE id="xWynKg" name="Biquad.h" compile="0" resource="0" file="Source/Biquad.h"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
