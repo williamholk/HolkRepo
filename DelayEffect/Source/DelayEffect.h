@@ -48,4 +48,8 @@ private:
     
     float lowPassFreq = 20000.f;
     
+    static const int BUFFERSIZE = 96000;
+    float w[2][BUFFERSIZE] = {0.f};
+    int writeIndex[2] = {47999,47999};
+    
 };

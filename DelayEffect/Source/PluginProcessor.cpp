@@ -93,8 +93,7 @@ void DelayEffectAudioProcessor::changeProgramName (int index, const juce::String
 //==============================================================================
 void DelayEffectAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    delay.prepare(sampleRate);
 }
 
 void DelayEffectAudioProcessor::releaseResources()
@@ -151,13 +150,29 @@ void DelayEffectAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     // Alternatively, you can process the samples with the channels
     // interleaved by keeping the same state.
     
-    
+    if (tempoSyncd){
+        playHead = this->getPlayHead();
+        playHead->getCurrentPosition(currentPositionInfo);
+        
+        float newBPM = currentPositionInfo.bpm;
+        if (bpm != newBPM){
+            // update echo
+            delay.setBPM(newBPM);
+            bpm = newBPM;
+        }
+        delay.setNoteDuration(noteDuration);
+    }
+    else{ // not tempo sync'd
+        delay.setDelayMS(delayMS);
+    }
     
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
-        auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
+        for (int n = 0; n < buffer.getNumSamples() ; ++n){
+            float x = buffer.getReadPointer(channel)[n];
+            x = delay.processSample(x, channel);
+            buffer.getWritePointer(channel)[n] = x;
+        }
     }
 }
 

@@ -24,6 +24,27 @@ void DelayEffect::setDelayMS(float newDelayMS){
     }
 }
 
+float DelayEffect::processSample(float x, int c){
+    
+    int delayIndex = writeIndex[c] - delaySamples;
+    
+    if (delayIndex < 0){
+        delayIndex += BUFFERSIZE;
+    }
+    
+    float y = x + 0.7f * w[c][delayIndex];
+    
+    w[c][writeIndex[c]] = y;
+    
+    writeIndex[c]++;
+    if (writeIndex[c] >= BUFFERSIZE){
+        writeIndex[c] = 0;
+    }
+    
+    return y;
+    
+}
+
 void DelayEffect::setBPM(float newBPM){
     bpm = newBPM;
 }
