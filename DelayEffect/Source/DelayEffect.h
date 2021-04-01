@@ -44,7 +44,7 @@ private:
     
     float noteDuration = 1.f; // 1 - quarter, 2 - half, 0.5 - 8th, 0.25 - 16th, 0.125 - 16th
     
-    float feedbackGain = 1.f;
+    float feedbackGain = 0.7f;
     
     float lowPassFreq = 20000.f;
     

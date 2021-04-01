@@ -32,7 +32,7 @@ float DelayEffect::processSample(float x, int c){
         delayIndex += BUFFERSIZE;
     }
     
-    float y = x + 0.7f * w[c][delayIndex];
+    float y = x + feedbackGain * w[c][delayIndex];
     
     w[c][writeIndex[c]] = y;
     

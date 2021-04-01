@@ -166,6 +166,8 @@ void DelayEffectAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
         delay.setDelayMS(delayMS);
     }
     
+    delay.setFeedbackGain(feedbackGain);
+    
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
         for (int n = 0; n < buffer.getNumSamples() ; ++n){
