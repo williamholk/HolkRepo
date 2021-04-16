@@ -15,7 +15,8 @@
 /**
 */
 class DelayEffectAudioProcessorEditor  : public juce::AudioProcessorEditor,
-                                         public juce::ComboBox::Listener
+                                         public juce::ComboBox::Listener,
+                                         public juce::Button::Listener
 {
 public:
     DelayEffectAudioProcessorEditor (DelayEffectAudioProcessor&);
@@ -26,6 +27,8 @@ public:
     void resized() override;
     
     void comboBoxChanged(ComboBox * comboBox) override;
+    
+    void buttonClicked(Button * button) override;
     
     
 private:

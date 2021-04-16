@@ -41,6 +41,7 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     tempoButton.setBounds(200, 55, 100, 40);
     tempoButton.setColour(TextButton::buttonColourId, Colours::red);
     tempoButton.setColour(TextButton::buttonOnColourId, Colours::green);
+    tempoButton.addListener(this);
     tempoButton.setClickingTogglesState(true);
     tempoButton.onClick = [this]() { };
     tempoButton.setButtonText("Tempo Sync");
@@ -64,6 +65,9 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     addAndMakeVisible(lowPassKnob);
     
     sliderAttachments.emplace_back(new AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state, "lowPassValue", lowPassKnob));
+    
+    delayKnob.setEnabled(!tempoButton.getToggleState());
+    noteChoice.setEnabled(tempoButton.getToggleState());
     
 }
 
@@ -115,4 +119,13 @@ void DelayEffectAudioProcessorEditor::comboBoxChanged(ComboBox *comboBox){
             audioProcessor.noteDuration = 0.125f;
         }
     }
+}
+
+void DelayEffectAudioProcessorEditor::buttonClicked(Button * button){
+    
+    if (button == &tempoButton){
+        delayKnob.setEnabled(!tempoButton.getToggleState());
+        noteChoice.setEnabled(tempoButton.getToggleState());
+    }
+    
 }
