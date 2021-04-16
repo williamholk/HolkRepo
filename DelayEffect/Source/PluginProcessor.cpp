@@ -36,6 +36,8 @@ AudioProcessorValueTreeState::ParameterLayout DelayEffectAudioProcessor::createP
     
     params.push_back(std::make_unique<AudioParameterFloat>("feedbackValue", "Feedback", 0.f, 1.f,0.01f));
     
+    params.push_back(std::make_unique<AudioParameterFloat>("lowPassValue", "LPF", 20.f, 20000.f, 1.f));
+    
     return {params.begin() , params.end()};
 }
 
@@ -177,8 +179,11 @@ void DelayEffectAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
         float delayMS = *state.getRawParameterValue("delayMSValue");
         delay.setDelayMS(delayMS);
     }
+    
     float feedbackGain = *state.getRawParameterValue("feedbackValue");
     delay.setFeedbackGain(feedbackGain);
+    
+    float lowPassFreq = *state.getRawParameterValue("lowPassValue");
     delay.setLowPassFreq(lowPassFreq);
     
     for (int channel = 0; channel < totalNumInputChannels; ++channel)

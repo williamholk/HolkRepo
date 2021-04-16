@@ -17,7 +17,7 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     // editor's size to whatever you need it to be.
     setSize (500, 250);
     
-//    delayKnob.addListener(this);
+    delayKnob.addListener(this);
     delayKnob.setBounds(100, 50, 150, 150);
     delayKnob.setCentrePosition(250, 140);
 //    delayKnob.setValue(audioProcessor.delayMS);
@@ -29,7 +29,9 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     
 //    sliderAttachments = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.state, "delayMSValue", delayKnob);
     
-    sliderAttachments.emplace_back(new AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state, "delayMSValue", delayKnob)); 
+//    sliderAttachments.emplace_back(new AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state, "delayMSValue", delayKnob));
+    
+    sliderAttachments.emplace_back(new AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state, "delayMSValue", delayKnob));
     
     noteSelector.addListener(this);
     noteSelector.addItem("Half", 1);
@@ -58,7 +60,7 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     notTempoSyncButton.setRadioGroupId(1);
     addAndMakeVisible(notTempoSyncButton);
     
-//    feedbackKnob.addListener(this);
+    feedbackKnob.addListener(this);
     feedbackKnob.setBounds(50, 50, 110, 110);
     feedbackKnob.setCentrePosition(100, 125);
 //    feedbackKnob.setValue(audioProcessor.feedbackGain);
@@ -74,11 +76,13 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     lowPassKnob.setCentrePosition(400, 125);
     lowPassKnob.setRange(20.f, 20000.f, 1.f);
     lowPassKnob.setSkewFactorFromMidPoint(2000);
-    lowPassKnob.setValue(audioProcessor.lowPassFreq);
+//    lowPassKnob.setValue(audioProcessor.lowPassFreq);
     lowPassKnob.setTextValueSuffix("Hz");
     lowPassKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
     lowPassKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     addAndMakeVisible(lowPassKnob);
+    
+    sliderAttachments.emplace_back(new AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state, "lowPassValue", lowPassKnob));
     
     delayKnob.setEnabled(!audioProcessor.tempoSyncd);
     noteSelector.setEnabled(audioProcessor.tempoSyncd);
@@ -113,20 +117,20 @@ void DelayEffectAudioProcessorEditor::resized()
 }
 
 void DelayEffectAudioProcessorEditor::sliderValueChanged(Slider * slider){
-    
+
 //    if (slider == &delayKnob){
 //        audioProcessor.delayMS = delayKnob.getValue();
 //    }
-    
+//
 //    if (slider == &feedbackKnob){
 //        audioProcessor.feedbackGain = feedbackKnob.getValue();
 //    }
-    
-    if (slider == &lowPassKnob){
-        audioProcessor.lowPassFreq = lowPassKnob.getValue();
-        audioProcessor.filter.setFreq(audioProcessor.lowPassFreq);
-    }
-    
+//
+//    if (slider == &lowPassKnob){
+//        audioProcessor.lowPassFreq = lowPassKnob.getValue();
+//        audioProcessor.filter.setFreq(audioProcessor.lowPassFreq);
+//    }
+
 }
 
 void DelayEffectAudioProcessorEditor::comboBoxChanged(ComboBox *comboBox){

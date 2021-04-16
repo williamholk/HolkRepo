@@ -33,6 +33,12 @@ public:
     
     void buttonClicked(Button * button) override;
     
+    Slider delayKnob;
+    
+    Slider feedbackKnob;
+    
+    Slider lowPassKnob;
+    
     std::vector<std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment>> sliderAttachments;
     
 private:
@@ -40,7 +46,7 @@ private:
     // access the processor object that created it.
     DelayEffectAudioProcessor& audioProcessor;
     
-    Slider delayKnob;
+//    Slider delayKnob;
     
     ComboBox noteSelector;
     
@@ -48,9 +54,9 @@ private:
     
     ToggleButton notTempoSyncButton;
     
-    Slider feedbackKnob;
+//    Slider feedbackKnob;
     
-    Slider lowPassKnob;
+//    Slider lowPassKnob;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayEffectAudioProcessorEditor)
 };
