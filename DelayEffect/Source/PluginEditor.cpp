@@ -17,15 +17,19 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     // editor's size to whatever you need it to be.
     setSize (500, 250);
     
-    delayKnob.addListener(this);
+//    delayKnob.addListener(this);
     delayKnob.setBounds(100, 50, 150, 150);
     delayKnob.setCentrePosition(250, 140);
-    delayKnob.setValue(audioProcessor.delayMS);
+//    delayKnob.setValue(audioProcessor.delayMS);
     delayKnob.setRange(10.f, 1000.f,1.f);
     delayKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
     delayKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     delayKnob.setTextValueSuffix("ms");
     addAndMakeVisible(delayKnob);
+    
+//    sliderAttachments = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.state, "delayMSValue", delayKnob);
+    
+    sliderAttachments.emplace_back(new AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state, "delayMSValue", delayKnob)); 
     
     noteSelector.addListener(this);
     noteSelector.addItem("Half", 1);
@@ -54,14 +58,16 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     notTempoSyncButton.setRadioGroupId(1);
     addAndMakeVisible(notTempoSyncButton);
     
-    feedbackKnob.addListener(this);
+//    feedbackKnob.addListener(this);
     feedbackKnob.setBounds(50, 50, 110, 110);
     feedbackKnob.setCentrePosition(100, 125);
-    feedbackKnob.setValue(audioProcessor.feedbackGain);
+//    feedbackKnob.setValue(audioProcessor.feedbackGain);
     feedbackKnob.setRange(0.f, 1.f,0.01f);
     feedbackKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
     feedbackKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     addAndMakeVisible(feedbackKnob);
+    
+    sliderAttachments.emplace_back(new AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state, "feedbackValue", feedbackKnob));
     
     lowPassKnob.addListener(this);
     lowPassKnob.setBounds(50, 50, 110, 110);
@@ -108,13 +114,13 @@ void DelayEffectAudioProcessorEditor::resized()
 
 void DelayEffectAudioProcessorEditor::sliderValueChanged(Slider * slider){
     
-    if (slider == &delayKnob){
-        audioProcessor.delayMS = delayKnob.getValue();
-    }
+//    if (slider == &delayKnob){
+//        audioProcessor.delayMS = delayKnob.getValue();
+//    }
     
-    if (slider == &feedbackKnob){
-        audioProcessor.feedbackGain = feedbackKnob.getValue();
-    }
+//    if (slider == &feedbackKnob){
+//        audioProcessor.feedbackGain = feedbackKnob.getValue();
+//    }
     
     if (slider == &lowPassKnob){
         audioProcessor.lowPassFreq = lowPassKnob.getValue();

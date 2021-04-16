@@ -54,12 +54,17 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
-    float delayMS = 100.f;
+//    float delayMS = 100.f;
     float noteDuration = 1.f;
     bool tempoSyncd = true;
-    float feedbackGain = 0.0f;
+//    float feedbackGain = 0.0f;
     float lowPassFreq = 20000.f;
     Biquad filter = Biquad{Biquad::FilterType::LPF,0.7071f};
+    
+    AudioProcessorValueTreeState state;
+    
+    AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    
     
 private:
     
