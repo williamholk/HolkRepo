@@ -16,7 +16,6 @@
 */
 class DelayEffectAudioProcessorEditor  : public juce::AudioProcessorEditor,
                                          public juce::ComboBox::Listener
-//                                         public juce::Button::Listener
 {
 public:
     DelayEffectAudioProcessorEditor (DelayEffectAudioProcessor&);
@@ -27,9 +26,6 @@ public:
     void resized() override;
     
     void comboBoxChanged(ComboBox * comboBox) override;
-    
-//    void buttonClicked(Button * button) override;
-    
     
     
 private:
@@ -44,8 +40,6 @@ private:
     Slider lowPassKnob;
     
     std::vector<std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment>> sliderAttachments;
-    
-    ComboBox noteSelector;
     
     ComboBox noteChoice;
     

@@ -55,7 +55,6 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     float noteDuration = 1.f;
-//    bool tempoSyncd = true;
     
     Biquad filter = Biquad{Biquad::FilterType::LPF,0.7071f};
     
@@ -64,9 +63,6 @@ public:
     AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     
     bool buttonValue = *state.getRawParameterValue("tempoSync");
-    
-//    bool tempoSyncd = *state.getRawParameterValue("tempoSync");
-//    bool notTempoSyncd = *state.getRawParameterValue("notTempoSync");
     
 private:
     

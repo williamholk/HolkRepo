@@ -41,8 +41,6 @@ AudioProcessorValueTreeState::ParameterLayout DelayEffectAudioProcessor::createP
     
     params.push_back(std::make_unique<AudioParameterFloat>("lowPassValue", "LPF", normRange, 20000.f));
     
-//    params.push_back(std::make_unique<AudioParameterFloat>("lowPassValue", "LPF", 20.f, 20000.f, 1.f));
-    
     params.push_back(std::make_unique<AudioParameterBool>("tempoSync", "Tempo Sync", false));
     
     params.push_back(std::make_unique<AudioParameterChoice>("noteValue", "Note Value", StringArray ("Half", "Quarter", "8th", "16th", "32nd"), 1));
@@ -184,6 +182,7 @@ void DelayEffectAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
             delay.setBPM(newBPM);
             bpm = newBPM;
         }
+        
         delay.setNoteDuration(noteDuration);
     }
     else{ // not tempo sync'd

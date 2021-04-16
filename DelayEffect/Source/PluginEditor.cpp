@@ -19,7 +19,6 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     
     delayKnob.setBounds(100, 50, 150, 150);
     delayKnob.setCentrePosition(250, 170);
-    delayKnob.setRange(10.f, 1000.f,1.f);
     delayKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
     delayKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     delayKnob.setTextValueSuffix("ms");
@@ -51,7 +50,6 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     
     feedbackKnob.setBounds(50, 50, 110, 110);
     feedbackKnob.setCentrePosition(100, 125);
-    feedbackKnob.setRange(0.f, 1.f,0.01f);
     feedbackKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
     feedbackKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     addAndMakeVisible(feedbackKnob);
@@ -60,18 +58,12 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     
     lowPassKnob.setBounds(50, 50, 110, 110);
     lowPassKnob.setCentrePosition(400, 125);
-    lowPassKnob.setRange(20.f, 20000.f, 1.f);
-    lowPassKnob.setSkewFactorFromMidPoint(2000);
     lowPassKnob.setTextValueSuffix("Hz");
     lowPassKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
     lowPassKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     addAndMakeVisible(lowPassKnob);
     
     sliderAttachments.emplace_back(new AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state, "lowPassValue", lowPassKnob));
-    
-//    delayKnob.setEnabled(!audioProcessor.buttonValue);
-//    noteSelector.setEnabled(audioProcessor.buttonValue);
-    
     
 }
 
@@ -87,8 +79,6 @@ void DelayEffectAudioProcessorEditor::paint (juce::Graphics& g)
 
     g.setColour (juce::Colours::white);
     g.setFont (15.0f);
-    //g.drawFittedText ("ms", getLocalBounds(), juce::Justification::centred, 1);
-    //g.drawFittedText("ms", 300, 150, 100, 25, juce::Justification::verticallyCentred, 1);
     
     g.drawText("Feedback", 70, 55, 100, 25, NULL);
     
