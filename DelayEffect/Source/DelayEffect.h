@@ -39,11 +39,15 @@ private:
     
     float delayMS = 500.f;
     
+    float smoothDelay = round(Fs*delayMS/1000.f);
+    
     int delaySamples = round(Fs*delayMS/1000.f);
     
     float bpm = 120.f;
     
     float noteDuration = 1.f; // 1 - quarter, 2 - half, 0.5 - 8th, 0.25 - 16th, 0.125 - 16th
+    
+    float smoothFeedback = 0.0f;
     
     float feedbackGain = 0.0f;
     

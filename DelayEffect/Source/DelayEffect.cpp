@@ -26,7 +26,9 @@ void DelayEffect::setDelayMS(float newDelayMS){
 
 float DelayEffect::processSample(float x, int c){
     
-    int delayIndex = writeIndex[c] - delaySamples;
+    smoothDelay = 0.999f * smoothDelay + 0.001f * delaySamples;
+    
+    int delayIndex = writeIndex[c] - smoothDelay;
     
     if (delayIndex < 0){
         delayIndex += BUFFERSIZE;
@@ -34,7 +36,9 @@ float DelayEffect::processSample(float x, int c){
     
     float d = filter.processSample(w[c][delayIndex], c);
     
-    float y = x + feedbackGain * d;
+    smoothFeedback = 0.999f * smoothFeedback + 0.001f * feedbackGain;
+    
+    float y = x + smoothFeedback * d;
     
     w[c][writeIndex[c]] = y;
     
