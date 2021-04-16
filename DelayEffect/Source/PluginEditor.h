@@ -15,8 +15,8 @@
 /**
 */
 class DelayEffectAudioProcessorEditor  : public juce::AudioProcessorEditor,
-                                         public juce::ComboBox::Listener,
-                                         public juce::Button::Listener
+                                         public juce::ComboBox::Listener
+//                                         public juce::Button::Listener
 {
 public:
     DelayEffectAudioProcessorEditor (DelayEffectAudioProcessor&);
@@ -28,7 +28,7 @@ public:
     
     void comboBoxChanged(ComboBox * comboBox) override;
     
-    void buttonClicked(Button * button) override;
+//    void buttonClicked(Button * button) override;
     
     
     
@@ -47,11 +47,11 @@ private:
     
     ComboBox noteSelector;
     
-    ToggleButton tempoSyncButton;
+//    ToggleButton tempoSyncButton;
     
     TextButton tempoButton;
     
-    ToggleButton notTempoSyncButton;
+//    ToggleButton notTempoSyncButton;
     
     std::unique_ptr<AudioProcessorValueTreeState::ButtonAttachment> buttonAttachment;
 

@@ -18,7 +18,7 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     setSize (500, 250);
     
     delayKnob.setBounds(100, 50, 150, 150);
-    delayKnob.setCentrePosition(250, 140);
+    delayKnob.setCentrePosition(250, 170);
     delayKnob.setRange(10.f, 1000.f,1.f);
     delayKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
     delayKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
@@ -40,34 +40,15 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     noteSelector.setCentrePosition(250, 25);
     addAndMakeVisible(noteSelector);
     
-    tempoSyncButton.addListener(this);
-    tempoSyncButton.setBounds(270, 178, 100, 40);
-    tempoSyncButton.setCentrePosition(250, 60);
-    tempoSyncButton.setButtonText("BPM Sync");
-    tempoSyncButton.setToggleState(audioProcessor.tempoSyncd, dontSendNotification);
-    tempoSyncButton.setRadioGroupId(1);
-    addAndMakeVisible(tempoSyncButton);
-    
-//    buttonAttachments.emplace_back(new AudioProcessorValueTreeState::ButtonAttachment(audioProcessor.state, "tempoSync", tempoSyncButton));
-    
-    tempoButton.setBounds(330, 178, 100, 40);
+    tempoButton.setBounds(200, 57, 100, 40);
     tempoButton.setColour(TextButton::buttonColourId, Colours::red);
     tempoButton.setColour(TextButton::buttonOnColourId, Colours::green);
     tempoButton.setClickingTogglesState(true);
     tempoButton.onClick = [this]() { };
+    tempoButton.setButtonText("Tempo Sync");
     addAndMakeVisible(tempoButton);
     
     buttonAttachment = std::make_unique<AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.state, "tempoSync", tempoButton);
-    
-    notTempoSyncButton.addListener(this);
-    notTempoSyncButton.setBounds(270, 130, 100, 40);
-    notTempoSyncButton.setCentrePosition(250, 230);
-    notTempoSyncButton.setButtonText("Sync Off");
-    notTempoSyncButton.setToggleState(!audioProcessor.tempoSyncd, dontSendNotification);
-    notTempoSyncButton.setRadioGroupId(1);
-    addAndMakeVisible(notTempoSyncButton);
-    
-//    buttonAttachments.emplace_back(new AudioProcessorValueTreeState::ButtonAttachment(audioProcessor.state, "notTempoSync", tempoSyncButton));
     
     feedbackKnob.setBounds(50, 50, 110, 110);
     feedbackKnob.setCentrePosition(100, 125);
@@ -89,8 +70,8 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     
     sliderAttachments.emplace_back(new AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state, "lowPassValue", lowPassKnob));
     
-    delayKnob.setEnabled(!audioProcessor.tempoSyncd);
-    noteSelector.setEnabled(audioProcessor.tempoSyncd);
+//    delayKnob.setEnabled(!audioProcessor.buttonValue);
+//    noteSelector.setEnabled(audioProcessor.buttonValue);
     
     
 }
@@ -145,20 +126,4 @@ void DelayEffectAudioProcessorEditor::comboBoxChanged(ComboBox *comboBox){
             audioProcessor.noteDuration = 0.125f;
         }
     }
-}
-
-void DelayEffectAudioProcessorEditor::buttonClicked(Button *button){
-
-    if(button == &tempoSyncButton){
-        audioProcessor.tempoSyncd = true;
-        delayKnob.setEnabled(false);
-        noteSelector.setEnabled(true);
-    }
-
-    if(button == &notTempoSyncButton){
-        audioProcessor.tempoSyncd = false;
-        delayKnob.setEnabled(true);
-        noteSelector.setEnabled(false);
-    }
-
 }
