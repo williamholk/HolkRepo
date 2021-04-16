@@ -17,10 +17,8 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     // editor's size to whatever you need it to be.
     setSize (500, 250);
     
-    delayKnob.addListener(this);
     delayKnob.setBounds(100, 50, 150, 150);
     delayKnob.setCentrePosition(250, 140);
-//    delayKnob.setValue(audioProcessor.delayMS);
     delayKnob.setRange(10.f, 1000.f,1.f);
     delayKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
     delayKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
@@ -28,8 +26,6 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     addAndMakeVisible(delayKnob);
     
 //    sliderAttachments = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.state, "delayMSValue", delayKnob);
-    
-//    sliderAttachments.emplace_back(new AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state, "delayMSValue", delayKnob));
     
     sliderAttachments.emplace_back(new AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state, "delayMSValue", delayKnob));
     
@@ -52,6 +48,10 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     tempoSyncButton.setRadioGroupId(1);
     addAndMakeVisible(tempoSyncButton);
     
+//    buttonAttachments.emplace_back(new AudioProcessorValueTreeState::ButtonAttachment(audioProcessor.state, "tempoSync", tempoSyncButton));
+    
+    
+    
     notTempoSyncButton.addListener(this);
     notTempoSyncButton.setBounds(270, 130, 100, 40);
     notTempoSyncButton.setCentrePosition(250, 230);
@@ -60,10 +60,10 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     notTempoSyncButton.setRadioGroupId(1);
     addAndMakeVisible(notTempoSyncButton);
     
-    feedbackKnob.addListener(this);
+//    buttonAttachments.emplace_back(new AudioProcessorValueTreeState::ButtonAttachment(audioProcessor.state, "notTempoSync", tempoSyncButton));
+    
     feedbackKnob.setBounds(50, 50, 110, 110);
     feedbackKnob.setCentrePosition(100, 125);
-//    feedbackKnob.setValue(audioProcessor.feedbackGain);
     feedbackKnob.setRange(0.f, 1.f,0.01f);
     feedbackKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
     feedbackKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
@@ -71,12 +71,10 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     
     sliderAttachments.emplace_back(new AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state, "feedbackValue", feedbackKnob));
     
-    lowPassKnob.addListener(this);
     lowPassKnob.setBounds(50, 50, 110, 110);
     lowPassKnob.setCentrePosition(400, 125);
     lowPassKnob.setRange(20.f, 20000.f, 1.f);
     lowPassKnob.setSkewFactorFromMidPoint(2000);
-//    lowPassKnob.setValue(audioProcessor.lowPassFreq);
     lowPassKnob.setTextValueSuffix("Hz");
     lowPassKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 75, 25);
     lowPassKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
@@ -116,23 +114,6 @@ void DelayEffectAudioProcessorEditor::resized()
     // subcomponents in your editor..
 }
 
-void DelayEffectAudioProcessorEditor::sliderValueChanged(Slider * slider){
-
-//    if (slider == &delayKnob){
-//        audioProcessor.delayMS = delayKnob.getValue();
-//    }
-//
-//    if (slider == &feedbackKnob){
-//        audioProcessor.feedbackGain = feedbackKnob.getValue();
-//    }
-//
-//    if (slider == &lowPassKnob){
-//        audioProcessor.lowPassFreq = lowPassKnob.getValue();
-//        audioProcessor.filter.setFreq(audioProcessor.lowPassFreq);
-//    }
-
-}
-
 void DelayEffectAudioProcessorEditor::comboBoxChanged(ComboBox *comboBox){
    
     if (comboBox == &noteSelector){
@@ -160,17 +141,17 @@ void DelayEffectAudioProcessorEditor::comboBoxChanged(ComboBox *comboBox){
 }
 
 void DelayEffectAudioProcessorEditor::buttonClicked(Button *button){
-    
+
     if(button == &tempoSyncButton){
         audioProcessor.tempoSyncd = true;
         delayKnob.setEnabled(false);
         noteSelector.setEnabled(true);
     }
-    
+
     if(button == &notTempoSyncButton){
         audioProcessor.tempoSyncd = false;
         delayKnob.setEnabled(true);
         noteSelector.setEnabled(false);
     }
-    
+
 }

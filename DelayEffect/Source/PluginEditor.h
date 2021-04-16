@@ -15,7 +15,6 @@
 /**
 */
 class DelayEffectAudioProcessorEditor  : public juce::AudioProcessorEditor,
-                                         public juce::Slider::Listener,
                                          public juce::ComboBox::Listener,
                                          public juce::Button::Listener
 {
@@ -27,11 +26,16 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
     
-    void sliderValueChanged(Slider * slider) override;
-    
     void comboBoxChanged(ComboBox * comboBox) override;
     
     void buttonClicked(Button * button) override;
+    
+    
+    
+private:
+    // This reference is provided as a quick way for your editor to
+    // access the processor object that created it.
+    DelayEffectAudioProcessor& audioProcessor;
     
     Slider delayKnob;
     
@@ -41,22 +45,13 @@ public:
     
     std::vector<std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment>> sliderAttachments;
     
-private:
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
-    DelayEffectAudioProcessor& audioProcessor;
-    
-//    Slider delayKnob;
-    
     ComboBox noteSelector;
     
     ToggleButton tempoSyncButton;
     
     ToggleButton notTempoSyncButton;
     
-//    Slider feedbackKnob;
-    
-//    Slider lowPassKnob;
+    std::vector<std::unique_ptr<AudioProcessorValueTreeState::ButtonAttachment>> buttonAttachments;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayEffectAudioProcessorEditor)
 };
