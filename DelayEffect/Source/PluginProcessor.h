@@ -57,7 +57,7 @@ public:
 //    float delayMS = 100.f;
     float noteDuration = 1.f;
     bool tempoSyncd = true;
-    float feedbackGain = 0.0f;
+//    float feedbackGain = 0.0f;
     float lowPassFreq = 20000.f;
     Biquad filter = Biquad{Biquad::FilterType::LPF,0.7071f};
     
