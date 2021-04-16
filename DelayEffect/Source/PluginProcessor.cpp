@@ -34,9 +34,14 @@ AudioProcessorValueTreeState::ParameterLayout DelayEffectAudioProcessor::createP
     
     params.push_back(std::make_unique<AudioParameterFloat> ("delayMSValue", "Delay", 10.f, 1000.f, 1.f));
     
-    params.push_back(std::make_unique<AudioParameterFloat>("feedbackValue", "Feedback", 0.f, 1.f,0.01f));
+    params.push_back(std::make_unique<AudioParameterFloat>("feedbackValue", "Feedback", 0.f, 1.f,0.5f));
     
-    params.push_back(std::make_unique<AudioParameterFloat>("lowPassValue", "LPF", 20.f, 20000.f, 1.f));
+    auto normRange = NormalisableRange<float>(20.0f, 20000.f);
+    normRange.setSkewForCentre(2000.0f);
+    
+    params.push_back(std::make_unique<AudioParameterFloat>("lowPassValue", "LPF", normRange, 20000.f));
+    
+//    params.push_back(std::make_unique<AudioParameterFloat>("lowPassValue", "LPF", 20.f, 20000.f, 1.f));
     
     params.push_back(std::make_unique<AudioParameterBool>("tempoSync", "Tempo Sync", false));
     

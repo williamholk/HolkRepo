@@ -78,8 +78,8 @@ void DelayEffect::setFeedbackGain(float newFeedbackGain){
 }
 
 void DelayEffect::setLowPassFreq(float newLowPassFreq){
-    if(newLowPassFreq > 20000.f){
-        lowPassFreq = 20000.f;
+    if(newLowPassFreq > 20000.0f){
+        lowPassFreq = 20000.0f;
         filter.setFreq(lowPassFreq);
     }
     else if(newLowPassFreq < 0.f){
