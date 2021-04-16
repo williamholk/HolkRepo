@@ -25,22 +25,21 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     delayKnob.setTextValueSuffix("ms");
     addAndMakeVisible(delayKnob);
     
-//    sliderAttachments = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.state, "delayMSValue", delayKnob);
-    
     sliderAttachments.emplace_back(new AudioProcessorValueTreeState::SliderAttachment(audioProcessor.state, "delayMSValue", delayKnob));
     
-    noteSelector.addListener(this);
-    noteSelector.addItem("Half", 1);
-    noteSelector.addItem("Quarter", 2);
-    noteSelector.addItem("8th", 3);
-    noteSelector.addItem("16th", 4);
-    noteSelector.addItem("32nd", 5);
-    noteSelector.setSelectedId(2);
-    noteSelector.setBounds(325, 25, 120, 40);
-    noteSelector.setCentrePosition(250, 25);
-    addAndMakeVisible(noteSelector);
+    noteChoice.addListener(this);
+    noteChoice.addItem("Half", 1);
+    noteChoice.addItem("Quarter", 2);
+    noteChoice.addItem("8th", 3);
+    noteChoice.addItem("16th", 4);
+    noteChoice.addItem("32nd", 5);
+    noteChoice.setBounds(325, 25, 120, 40);
+    noteChoice.setCentrePosition(250, 25);
+    addAndMakeVisible(noteChoice);
     
-    tempoButton.setBounds(200, 57, 100, 40);
+    comboBoxAttachment = std::make_unique<AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.state, "noteValue", noteChoice);
+    
+    tempoButton.setBounds(200, 55, 100, 40);
     tempoButton.setColour(TextButton::buttonColourId, Colours::red);
     tempoButton.setColour(TextButton::buttonOnColourId, Colours::green);
     tempoButton.setClickingTogglesState(true);
@@ -104,24 +103,24 @@ void DelayEffectAudioProcessorEditor::resized()
 
 void DelayEffectAudioProcessorEditor::comboBoxChanged(ComboBox *comboBox){
    
-    if (comboBox == &noteSelector){
-        if(noteSelector.getSelectedId() == 1){
+    if (comboBox == &noteChoice){
+        if(noteChoice.getSelectedId() == 1){
             // half note
             audioProcessor.noteDuration = 2.f;
         }
-        if(noteSelector.getSelectedId() == 2){
+        if(noteChoice.getSelectedId() == 2){
             // quarter note
             audioProcessor.noteDuration = 1.f;
         }
-        if(noteSelector.getSelectedId() == 3){
+        if(noteChoice.getSelectedId() == 3){
             // 8th note
             audioProcessor.noteDuration = 0.5f;
         }
-        if(noteSelector.getSelectedId() == 4){
+        if(noteChoice.getSelectedId() == 4){
             // 16th note
             audioProcessor.noteDuration = 0.25f;
         }
-        if(noteSelector.getSelectedId() == 5){
+        if(noteChoice.getSelectedId() == 5){
             // 32nd note
             audioProcessor.noteDuration = 0.125f;
         }

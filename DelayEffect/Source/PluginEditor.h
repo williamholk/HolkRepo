@@ -47,12 +47,12 @@ private:
     
     ComboBox noteSelector;
     
-//    ToggleButton tempoSyncButton;
+    ComboBox noteChoice;
     
+    std::unique_ptr<AudioProcessorValueTreeState::ComboBoxAttachment> comboBoxAttachment;
+        
     TextButton tempoButton;
-    
-//    ToggleButton notTempoSyncButton;
-    
+        
     std::unique_ptr<AudioProcessorValueTreeState::ButtonAttachment> buttonAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayEffectAudioProcessorEditor)

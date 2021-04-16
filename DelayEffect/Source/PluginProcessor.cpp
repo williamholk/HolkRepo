@@ -40,6 +40,8 @@ AudioProcessorValueTreeState::ParameterLayout DelayEffectAudioProcessor::createP
     
     params.push_back(std::make_unique<AudioParameterBool>("tempoSync", "Tempo Sync", false));
     
+    params.push_back(std::make_unique<AudioParameterChoice>("noteValue", "Note Value", StringArray ("Half", "Quarter", "8th", "16th", "32nd"), 1));
+    
     return {params.begin() , params.end()};
 }
 
