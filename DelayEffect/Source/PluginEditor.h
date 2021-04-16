@@ -49,9 +49,11 @@ private:
     
     ToggleButton tempoSyncButton;
     
+    TextButton tempoButton;
+    
     ToggleButton notTempoSyncButton;
     
-    std::vector<std::unique_ptr<AudioProcessorValueTreeState::ButtonAttachment>> buttonAttachments;
+    std::unique_ptr<AudioProcessorValueTreeState::ButtonAttachment> buttonAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayEffectAudioProcessorEditor)
 };

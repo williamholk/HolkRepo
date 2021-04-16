@@ -50,7 +50,14 @@ DelayEffectAudioProcessorEditor::DelayEffectAudioProcessorEditor (DelayEffectAud
     
 //    buttonAttachments.emplace_back(new AudioProcessorValueTreeState::ButtonAttachment(audioProcessor.state, "tempoSync", tempoSyncButton));
     
+    tempoButton.setBounds(330, 178, 100, 40);
+    tempoButton.setColour(TextButton::buttonColourId, Colours::red);
+    tempoButton.setColour(TextButton::buttonOnColourId, Colours::green);
+    tempoButton.setClickingTogglesState(true);
+    tempoButton.onClick = [this]() { };
+    addAndMakeVisible(tempoButton);
     
+    buttonAttachment = std::make_unique<AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.state, "tempoSync", tempoButton);
     
     notTempoSyncButton.addListener(this);
     notTempoSyncButton.setBounds(270, 130, 100, 40);

@@ -56,6 +56,7 @@ public:
 
     float noteDuration = 1.f;
     bool tempoSyncd = true;
+    
     Biquad filter = Biquad{Biquad::FilterType::LPF,0.7071f};
     
     AudioProcessorValueTreeState state;

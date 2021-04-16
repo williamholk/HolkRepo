@@ -38,8 +38,8 @@ AudioProcessorValueTreeState::ParameterLayout DelayEffectAudioProcessor::createP
     
     params.push_back(std::make_unique<AudioParameterFloat>("lowPassValue", "LPF", 20.f, 20000.f, 1.f));
     
-//    params.push_back(std::make_unique<AudioParameterBool>("tempoSync", "Tempo Sync", true));
-//    
+    params.push_back(std::make_unique<AudioParameterBool>("tempoSync", "Tempo Sync", false));
+    
 //    params.push_back(std::make_unique<AudioParameterBool>("notTempoSync", "Not Tempo Sync", false));
     
     return {params.begin() , params.end()};
@@ -167,9 +167,9 @@ void DelayEffectAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     // Alternatively, you can process the samples with the channels
     // interleaved by keeping the same state.
     
+    bool buttonValue = *state.getRawParameterValue("tempoSync");
     
-    
-    if (tempoSyncd){
+    if (buttonValue){
         playHead = this->getPlayHead();
         playHead->getCurrentPosition(currentPositionInfo);
         
